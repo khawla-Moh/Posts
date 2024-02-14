@@ -1,0 +1,5 @@
+ - post ,comments model
+ - add comment in psot
+ - disply comments [old]
+ - filter commnets[new-old]
+ - create API 
