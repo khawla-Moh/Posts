@@ -1,5 +1,6 @@
 from django.db import models
 from taggit.managers import TaggableManager
+from django.utils.text import slugify
 
 from django.contrib.auth.models import User
 
@@ -21,10 +22,18 @@ class Posts(models.Model):
     category=models.ForeignKey(Category,related_name='post_category',on_delete=models.SET_NULL,null=True)
     tags = TaggableManager() 
     image=models.ImageField(upload_to='post')
+    slug=models.SlugField(blank=True,null=True , unique=True)
+    
+    def save(self, *args, **kwargs):
+            self.slug = slugify(self.name)
+            super(Posts, self).save(*args, **kwargs)
+
     
 
     def __str__(self) :
         return self.name 
+
+
 
 
 
@@ -36,4 +45,4 @@ class Comments(models.Model):
 
     
     def __str__(self) :
-        return self.user
+        return self.user.username    

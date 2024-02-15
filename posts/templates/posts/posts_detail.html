@@ -1,0 +1,61 @@
+
+    
+<p>username:{{post.author}}</p>
+<p>post tittle:{{post.name}}</p>
+<p>post content:{{post.content}}</p>
+<p>publish date:{{post.publish_date}}</p>
+<p>post category:{{post.category}}</p>
+<p>tags:{{post.tags}}</p>
+<img src="{{post.image.url}}" alt="" style="width: 40%; height: 40%;" srcset="">
+    
+
+
+
+
+< 
+<div class="container">
+    <h2>Comments</h2>
+    <form method="get">
+        <label for="order">Order by:</label> 
+        <select name="order" id="order"> 
+            <option value="new" name='new'>Newest comments</option> 
+            <option  value="old" name='old'>Oldest comments</option> 
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+ 
+    <ul>
+        
+        {% if request.GET.order == 'old' %}
+                            
+            {% for comment in comments  %}
+                    <div>
+                    <h3>{{comment.user.username}}</h3> 
+                    <p><span>{{comment.created_at}}<br></span>{{comment.text}}</p>
+                    
+                    </div>    
+            {% endfor %}      
+            
+            {% else %}
+                {% for comment in comments2  %}
+                        <div>
+                        <h3>{{comment.user.username}}</h3> 
+                        <p><span>{{comment.created_at}}<br></span>{{comment.text}}</p>
+                        
+                        </div>    
+                {% endfor %}      
+        
+        {% endif %}
+            
+    </ul>
+    
+        
+</div> 
+
+<form  method="post" action="/posts/{{post.slug}}/add_commnet">
+    {% csrf_token %}
+
+    <input type="text" name="comment">
+    
+    <button type="submit">send commnet</button> 
+</form>
