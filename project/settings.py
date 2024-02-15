@@ -28,6 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,8 +45,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
+    "django_bootstrap5",
     'taggit',
     'django_summernote',
+
+    #API
+    'rest_framework',
+    'rest_framework_swagger',
+    'drf_yasg',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
